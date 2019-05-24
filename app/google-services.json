@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "425010296075",
+    "firebase_url": "https://moodetect-56c53.firebaseio.com",
+    "project_id": "moodetect-56c53",
+    "storage_bucket": "moodetect-56c53.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425010296075:android:b20cc7409b4299ff",
+        "android_client_info": {
+          "package_name": "com.example.moodetect2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425010296075-v20ip5ho8i72icio3l49fueba94vrbn6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.moodetect2",
+            "certificate_hash": "171d24d38f7673e1f22d30fafd2ac55d2eaf0d55"
+          }
+        },
+        {
+          "client_id": "425010296075-2andrlgiet8lf5ndm4oikp4tguecu9ph.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDdLSAZIn_7J38Q8_doWH8OVu0SyFGeyFY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425010296075-2andrlgiet8lf5ndm4oikp4tguecu9ph.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
