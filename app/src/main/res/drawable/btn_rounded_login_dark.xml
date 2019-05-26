@@ -6,9 +6,10 @@
             <solid android:color="@color/colorPrimaryDark" />
 
             <!--border color-->
-            <stroke
-                android:width="2dp"
-                android:color="@color/colorLight" />
+            <!--used to be activated-->
+            <!--<stroke-->
+                <!--android:width="2dp"-->
+                <!--android:color="@color/colorLight" />-->
             <!--corners allow us to make the rounded corners button-->
             <corners android:radius="20dp" />
         </shape>

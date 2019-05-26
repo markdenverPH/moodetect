@@ -16,9 +16,22 @@
         <item name="android:statusBarColor">@color/colorAccent</item>
     </style>
 
+    <!--registration form animation on login activity-->
     <style name="DialogAnimation">
         <item name="android:windowEnterAnimation">@anim/anim_slide_up</item>
         <item name="android:windowExitAnimation">@anim/anim_slide_down</item>
+    </style>
+
+    <!--used to textinputlayout, colored light on focused: label, cursor, underline-->
+    <style name="customAppearanceLight" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlActivated">@color/colorLight</item>
+        <item name="android:textColor">@color/colorLight</item>
+    </style>
+
+    <!--used to textinputlayout, colored dark on focused: label, cursor, underline-->
+    <style name="customAppearanceDark">
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
 
 </resources>

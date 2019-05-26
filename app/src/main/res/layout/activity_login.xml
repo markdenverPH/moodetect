@@ -19,21 +19,33 @@
             android:gravity="center"
             android:orientation="vertical">
 
-            <LinearLayout
-                android:id="@+id/logo"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/imageView1"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
                 android:layout_marginTop="100dp"
-                android:background="@drawable/btn_rounded_login_light"
-                android:orientation="horizontal">
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_launcher_foreground"
+                app:riv_corner_radius="24dp"
+                app:riv_mutate_background="true"
+                app:riv_oval="false"
+                app:riv_tile_mode="clamp" />
 
-            </LinearLayout>
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/varela_round"
+                android:text="moodetect"
+                android:textSize="24dp"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:id="@+id/linearLayout"
-                android:layout_width="256dp"
+                android:layout_width="296dp"
                 android:layout_height="56dp"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="72dp"
                 android:background="@drawable/input_rounded_login"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
@@ -46,6 +58,7 @@
                     app:srcCompat="@drawable/ic_email" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_email"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
@@ -63,7 +76,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="256dp"
+                android:layout_width="296dp"
                 android:layout_height="58dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/input_rounded_login"
@@ -79,11 +92,13 @@
                     app:srcCompat="@drawable/ic_pass" />
 
                 <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_pass"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginBottom="12dp">
+                    android:layout_marginBottom="12dp"
+                    app:passwordToggleEnabled="true">
 
                     <android.support.design.widget.TextInputEditText
                         android:layout_width="match_parent"
