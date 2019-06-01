@@ -21,9 +21,10 @@ allprojects {
         jcenter()
 
         // ibm
-        maven {
-            url  "https://dl.bintray.com/ibm-cloud-sdks/ibm-cloud-sdk-repo"
-        }
+        maven { url  "https://dl.bintray.com/ibm-cloud-sdks/ibm-cloud-sdk-repo" }
+
+        // toasty
+        maven { url "https://jitpack.io" }
     }
 }
 

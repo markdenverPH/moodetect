@@ -40,5 +40,9 @@ dependencies {
     implementation 'com.makeramen:roundedimageview:2.3.0'
 
     // firebase dependencies
-    implementation 'com.google.firebase:firebase-auth:17.0.0'
+    implementation 'com.google.firebase:firebase-auth:17.0.0' // auth
+    implementation 'com.google.firebase:firebase-firestore:19.0.0' // firestore
+
+    // Toasty: toast with steroids
+    implementation 'com.github.GrenderG:Toasty:1.4.2'
 }

@@ -1,12 +1,18 @@
 package com.example.moodetect2;
 
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.content.res.ResourcesCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +21,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import es.dmoral.toasty.Toasty;
 
 public class RegistrationForm extends DialogFragment {
     View v;
@@ -29,6 +43,8 @@ public class RegistrationForm extends DialogFragment {
     EditText et_firstname, et_lastname, et_email, et_pass, et_confirm_pass;
     FirebaseAuth firebaseAuth;
     LinearLayout reg_base_layout;
+    boolean reg_status;
+    TextInputLayout til_pass, til_confirm_pass;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,21 +55,6 @@ public class RegistrationForm extends DialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         v = inflater.inflate(R.layout.activity_registration_form, container, false);
-
-        if (getDialog() != null && getDialog().getWindow() != null) {
-            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            getDialog().setCanceledOnTouchOutside(true);
-        }
-
-        return v;
-    }
-
-    @Override
-    public void onActivityCreated(Bundle arg0) {
-        super.onActivityCreated(arg0);
-//            getDialog().getWindow().getAttributes().windowAnimations = R.style.DialogAnimation;
-
         btn_cancel = v.findViewById(R.id.btn_cancel);
         btn_register = v.findViewById(R.id.btn_register);
         tv_errors = v.findViewById(R.id.tv_errors);
@@ -62,12 +63,45 @@ public class RegistrationForm extends DialogFragment {
         et_email = v.findViewById(R.id.et_email);
         et_pass = v.findViewById(R.id.et_pass);
         et_confirm_pass = v.findViewById(R.id.et_confirm_pass);
+        til_pass = v.findViewById(R.id.til_pass);
+        til_confirm_pass = v.findViewById(R.id.til_confirm_pass);
         reg_base_layout = v.findViewById(R.id.reg_base_layout);
+        reg_status = false;
+
+        til_pass.setTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round));
+        til_confirm_pass.setTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round));
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            getDialog().setCanceledOnTouchOutside(false);
+        }
+
+        return v;
+    }
+
+    @Override
+    public void onActivityCreated(Bundle arg0) {
+        super.onActivityCreated(arg0);
+        getDialog().getWindow().setWindowAnimations(R.style.DialogAnimation);
+
+        // src: https://stackoverflow.com/questions/21307858/detect-back-button-but-dont-dismiss-dialogfragment
+        // control back press
+        getDialog().setOnKeyListener(new DialogInterface.OnKeyListener() {
+            @Override
+            public boolean onKey(android.content.DialogInterface dialog, int keyCode, android.view.KeyEvent event) {
+                if (keyCode ==  android.view.KeyEvent.KEYCODE_BACK && btn_cancel.isEnabled()) {
+//                    dismiss();
+                    return true;
+                } else return false;
+            }
+        });
 
         btn_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDialog().cancel();
+                set_default_values();
+                getDialog().dismiss();
             }
         });
 
@@ -116,43 +150,85 @@ public class RegistrationForm extends DialogFragment {
                     disable_buttons(false);
                 } else {
                     tv_errors.setVisibility(View.GONE);
-                    register_user(str_email, str_pass);
+                    register_user(str_email, str_pass, str_firstname, str_lastname);
                 }
             }
         });
     }
 
-    private void register_user(final String str_email, final String str_pass){
+    private void register_user(final String str_email, final String str_pass, final String str_firstname, final String str_lastname){
         firebaseAuth = FirebaseAuth.getInstance();
+        // auto signed in
         firebaseAuth.createUserWithEmailAndPassword(str_email, str_pass)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-
-                            // put value in firestore
-
-                            final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
-                            firebaseUser.sendEmailVerification()
-                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task task) {
-                                            // Re-enable button
-                                            if (task.isSuccessful()) {
-                                                getDialog().dismiss();
-                                            } else {
-                                                Snackbar.make(reg_base_layout,"1 Something wrong happened. Please retry", Snackbar.LENGTH_LONG).show();
-                                                disable_buttons(false);
-                                            }
-                                        }
-                                    });
+                            insert_data();
                         } else {
-                            Snackbar.make(reg_base_layout,"2 Something wrong happened. Please retry", Snackbar.LENGTH_LONG).show();
-                            disable_buttons(false);
+                            Log.d("check_on", "error in create_user");
+                            error_occured(task);
                         }
                     }
+
+                    private void insert_data() {
+                        // put value in firestore
+                        String uid = firebaseAuth.getUid();
+                        FirebaseFirestore firebaseFirestore = FirebaseFirestore.getInstance();
+                        CollectionReference collection_users = firebaseFirestore.collection("users");
+                        Map<String, Object> data = new HashMap<>();
+                        data.put("first_name", str_firstname);
+                        data.put("last_name", str_lastname);
+                        data.put("email", str_email);
+                        data.put("uid", uid);
+                        data.put("first_login", false);
+                        collection_users.document(uid).set(data).addOnCompleteListener(new OnCompleteListener<Void>(){
+
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    send_verification();
+                                } else {
+                                    Log.d("check_on", "error in insertion of data");
+                                    error_occured(task);
+                                }
+                            }
+                        });
+                    }
+
+                    private void send_verification(){
+                        final FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
+                        firebaseUser.sendEmailVerification()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task task) {
+                                        // Re-enable button
+                                        if (task.isSuccessful()) {
+                                            set_default_values();
+                                            reg_status = true;
+                                            firebaseAuth.signOut();
+                                            if(getDialog() != null ) {
+                                                getDialog().dismiss();
+                                            }
+                                        } else {
+                                            Log.d("check_on", "error in send email verification");
+                                            error_occured(task);
+                                        }
+                                    }
+                                });
+                    }
                 });
+    }
+
+    private void error_occured(Task task){
+        // src: https://stackoverflow.com/questions/14343903/what-is-the-equivalent-of-androidfontfamily-sans-serif-light-in-java-code
+        Toasty.Config.getInstance()
+                .setToastTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round))
+                .setTextSize(14)
+                .apply();
+        Toasty.error(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG, true).show();
+        reg_status = false;
+        disable_buttons(false);
     }
 
     private void disable_buttons(boolean value){
@@ -167,6 +243,28 @@ public class RegistrationForm extends DialogFragment {
             btn_register.setAlpha(1);
             btn_register.setEnabled(true);
         }
+    }
+
+    public boolean getReg_status(){
+        return reg_status;
+    }
+
+    // src: https://stackoverflow.com/questions/23786033/dialogfragment-and-ondismiss
+    @Override
+    public void onDismiss(DialogInterface dialog) {
+        super.onDismiss(dialog);
+        final Activity activity = getActivity();
+        if (activity instanceof DialogInterface.OnDismissListener) {
+            ((DialogInterface.OnDismissListener) activity).onDismiss(dialog);
+        }
+    }
+
+    private void set_default_values(){
+        et_firstname.setText("");
+        et_lastname.setText("");
+        et_email.setText("");
+        et_pass.setText("");
+        et_confirm_pass.setText("");
     }
 
 }

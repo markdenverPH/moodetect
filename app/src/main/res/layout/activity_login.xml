@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <com.makeramen.roundedimageview.RoundedImageView
-                android:id="@+id/imageView1"
+                android:id="@+id/logo"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:layout_marginTop="100dp"
@@ -33,7 +33,7 @@
                 app:riv_tile_mode="clamp" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/text_moodetect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
