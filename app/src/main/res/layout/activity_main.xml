@@ -7,6 +7,14 @@
     android:background="@color/bg_color"
     tools:context=".MainActivity">
 
+    <Button
+        android:id="@+id/btn_logout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="LOGOUT"
+        app:layout_constraintEnd_toEndOf="@+id/my_toolbar" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
         android:layout_width="match_parent"

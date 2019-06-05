@@ -221,12 +221,8 @@ public class RegistrationForm extends DialogFragment {
     }
 
     private void error_occured(Task task){
-        // src: https://stackoverflow.com/questions/14343903/what-is-the-equivalent-of-androidfontfamily-sans-serif-light-in-java-code
-        Toasty.Config.getInstance()
-                .setToastTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round))
-                .setTextSize(14)
-                .apply();
-        Toasty.error(getContext(), task.getException().getMessage(), Toast.LENGTH_LONG, true).show();
+        Global global = new Global(getContext());
+        global.error_occured(task);
         reg_status = false;
         disable_buttons(false);
     }
