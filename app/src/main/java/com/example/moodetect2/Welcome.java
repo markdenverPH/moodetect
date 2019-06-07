@@ -31,6 +31,7 @@ public class Welcome extends AppCompatActivity {
         super.onResume();
         if (auth.getCurrentUser() != null && auth.getCurrentUser().isEmailVerified()) {
             startActivity(main_intent);
+            finish();
         } else {
             Animation fade_in = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_in);
             logo.startAnimation(fade_in);
