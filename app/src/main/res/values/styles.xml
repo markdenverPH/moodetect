@@ -9,11 +9,19 @@
 
         <!--status bar color-->
         <item name="android:statusBarColor">@color/colorAccent</item>
+
+        <!-- disable multi touch -->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <!--status bar color-->
         <item name="android:statusBarColor">@color/colorAccent</item>
+
+        <!-- disable multi touch -->
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
     </style>
 
     <!--registration form animation on login activity-->
@@ -33,5 +41,9 @@
         <item name="colorControlActivated">@color/colorPrimaryDark</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
     </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
