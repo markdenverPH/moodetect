@@ -133,6 +133,17 @@
                 android:fontFamily="@font/varela_round"
                 android:text="REGISTER"
                 android:textColor="@color/colorLight" />
+
+            <TextView
+                android:id="@+id/tv_forgot_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dip"
+                android:fontFamily="@font/varela_round"
+                android:gravity="center_horizontal"
+                android:text="Forgot password?\nClick here."
+                android:textColor="@color/bg_color"
+                android:textSize="16dip" />
         </LinearLayout>
     </ScrollView>
 

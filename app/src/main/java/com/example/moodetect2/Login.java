@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -23,7 +24,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Login extends AppCompatActivity implements DialogInterface.OnDismissListener {
+public class Login extends AppCompatActivity implements DialogInterface.OnDismissListener,
+        ForgotPasswordDialog.DialogForgotPassword {
 
     Button btn_login, btn_register;
     TextInputLayout til_email, til_pass;
@@ -32,6 +34,8 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
     FirebaseAuth firebaseAuth;
     EditText et_email, et_pass;
     Global global;
+    TextView tv_forgot_pass;
+    ForgotPasswordDialog forgot_pass_dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,8 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
         et_pass = findViewById(R.id.et_pass);
         firebaseAuth = FirebaseAuth.getInstance();
         global = new Global(getApplicationContext());
+        tv_forgot_pass = findViewById(R.id.tv_forgot_pass);
+        forgot_pass_dialog = new ForgotPasswordDialog();
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,11 +74,21 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
 //                String pass = String.valueOf(et_pass.getText());
                 String email = "babaranmark@yahoo.com";
                 String pass = "mark1234";
-                if(email.isEmpty() || pass.isEmpty()){
+                if(email.isEmpty() || pass.isEmpty()) {
                     disable_buttons(false);
                     Snackbar.make(base_layout, "Please fill-up the login fields.", Snackbar.LENGTH_LONG).show();
                 } else {
                     sign_in(email, pass);
+                }
+            }
+        });
+
+        tv_forgot_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(!forgot_pass_dialog.isVisible()){
+                    forgot_pass_dialog.show(getSupportFragmentManager(), "forgot_pass");
+                    forgot_pass_dialog.setContext(Login.this);
                 }
             }
         });
@@ -157,5 +173,10 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
             btn_register.setAlpha(1);
             btn_register.setEnabled(true);
         }
+    }
+
+    @Override
+    public void onConfirm(String str) {
+        Snackbar.make(base_layout, str, Snackbar.LENGTH_LONG).show();
     }
 }
