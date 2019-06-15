@@ -45,4 +45,7 @@ dependencies {
 
     // Toasty: toast with steroids
     implementation 'com.github.GrenderG:Toasty:1.4.2'
+
+    // graph
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
 }

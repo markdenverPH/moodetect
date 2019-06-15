@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -47,8 +46,8 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
         til_pass = findViewById(R.id.til_pass);
         base_layout = findViewById(R.id.base_layout);
         registrationForm = new RegistrationForm();
-        til_pass.setTypeface(ResourcesCompat.getFont(this, R.font.varela_round));
-        til_email.setTypeface(ResourcesCompat.getFont(this, R.font.varela_round));
+        til_pass.setTypeface(global.getCustomTypeface());
+        til_email.setTypeface(global.getCustomTypeface());
         et_email = findViewById(R.id.et_email);
         et_pass = findViewById(R.id.et_pass);
         firebaseAuth = FirebaseAuth.getInstance();

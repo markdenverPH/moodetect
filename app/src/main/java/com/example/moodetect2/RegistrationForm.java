@@ -2,19 +2,15 @@ package com.example.moodetect2;
 
 import android.app.Activity;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -40,6 +36,7 @@ public class RegistrationForm extends DialogFragment {
     LinearLayout reg_base_layout;
     boolean reg_status;
     TextInputLayout til_pass, til_confirm_pass;
+    Global global;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,16 +58,11 @@ public class RegistrationForm extends DialogFragment {
         til_pass = v.findViewById(R.id.til_pass);
         til_confirm_pass = v.findViewById(R.id.til_confirm_pass);
         reg_base_layout = v.findViewById(R.id.reg_base_layout);
+        global = new Global(getContext());
         reg_status = false;
 
-        til_pass.setTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round));
-        til_confirm_pass.setTypeface(ResourcesCompat.getFont(getContext(), R.font.varela_round));
-
-        if (getDialog() != null && getDialog().getWindow() != null) {
-            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-            getDialog().setCanceledOnTouchOutside(false);
-        }
+        til_pass.setTypeface(global.getCustomTypeface());
+        til_confirm_pass.setTypeface(global.getCustomTypeface());
 
         return v;
     }

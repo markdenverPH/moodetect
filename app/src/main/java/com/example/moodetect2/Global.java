@@ -3,6 +3,7 @@ package com.example.moodetect2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.support.v4.content.res.ResourcesCompat;
 import android.widget.Toast;
 
@@ -53,5 +54,9 @@ public class Global {
         toneAnalyzer.setEndPoint("https://gateway.watsonplatform.net/tone-analyzer/api");
 
         return toneAnalyzer;
+    }
+
+    public Typeface getCustomTypeface(){
+        return ResourcesCompat.getFont(context, R.font.varela_round);
     }
 }
