@@ -14,7 +14,9 @@
         android:supportsRtl="true">
         <activity
             android:name=".Moodlets"
-            android:label="Moodlets"/>
+            android:label="Moodlets"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
         <activity android:name=".ProfileDialog" />
         <activity android:name=".ForgotPasswordDialog" />
         <activity

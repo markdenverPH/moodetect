@@ -1,6 +1,8 @@
 package com.example.moodetect2;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -29,23 +31,27 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
     }
 
     @Override
-    protected String doInBackground(String... strings) {
-        Global global = new Global(null);
-        ToneAnalyzer toneAnalyzer = global.get_analyzer();
+    protected String doInBackground(String... string) {
+        if(isNetworkConnected(context)){
+            Global global = new Global(null);
+            ToneAnalyzer toneAnalyzer = global.get_analyzer();
 
-        String text = "Team, I know that times are tough! Product "
-                + "sales have been disappointing for the past three "
-                + "quarters. We have a competitive product, but we "
-                + "need to do a better job of selling it!";
+//        String text = "Team, I know that times are tough! Product "
+//                + "sales have been disappointing for the past three "
+//                + "quarters. We have a competitive product, but we "
+//                + "need to do a better job of selling it!";
 
-        ToneOptions toneOptions = new ToneOptions.Builder()
-                .text(text)
-                .build();
+            ToneOptions toneOptions = new ToneOptions.Builder()
+                    .text(string[0])
+                    .build();
 
-        ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute().getResult();
-        Log.d("tonel", String.valueOf(toneAnalysis));
+            ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute().getResult();
+            Log.d("tonel", String.valueOf(toneAnalysis));
 
-        return String.valueOf(toneAnalysis);
+            return String.valueOf(toneAnalysis);
+        } else {
+            return "";
+        }
     }
 
     @Override
@@ -56,16 +62,22 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
 
     private ArrayList<String[]> parseJSON(String json){
         try {
+            if(json.isEmpty()){
+                new Global(context).error_occured("There is no internet connection.");
+                return null;
+            }
             JSONObject jsonObject = new JSONObject(json);
             JSONArray jsonArray = jsonObject.getJSONObject("document_tone").getJSONArray("tones");
             ArrayList<String[]> result = new ArrayList<>();
 
             int json_array_length = jsonArray.length();
-            if (json == "" || json_array_length == 0) { //if empty json
-                return null;
+            if (json_array_length == 0) { //if empty json
+                String[] data = {"1", "neutral", "Neutral"};
+                result.add(0, data);
+                return result;
             } else {
                 int i = 0;
-
+//                boolean[] list_emotions = {false, false, false, false}; // anger, fear, joy, sadness
                 while (json_array_length > i) {
                     jsonObject = jsonArray.getJSONObject(i);
                     String hold_tone_id = jsonObject.getString("tone_id");
@@ -73,18 +85,58 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
                     if(!(hold_tone_id.equalsIgnoreCase("tentative") ||
                             hold_tone_id.equalsIgnoreCase("analytical") ||
                             hold_tone_id.equalsIgnoreCase("confident"))){
-                        String[] data = {jsonObject.getString("score"), jsonObject.getString("tone_id"),
+                        String[] data = {jsonObject.getString("score"), hold_tone_id,
                                 jsonObject.getString("tone_name")};
                         result.add(i, data);
+
+                        // checks if already added
+//                        if(hold_tone_id.equalsIgnoreCase("anger")) {
+//                            list_emotions[0] = true;
+//                        } else if(hold_tone_id.equalsIgnoreCase("fear")) {
+//                            list_emotions[1] = true;
+//                        } else if(hold_tone_id.equalsIgnoreCase("joy")) {
+//                            list_emotions[2] = true;
+//                        } else if(hold_tone_id.equalsIgnoreCase("sadness")) {
+//                            list_emotions[3] = true;
+//                        }
                     }
                     i++;
                 }
+
+//                if(!list_emotions[0]){
+//                    String[] data = {"0", "anger", "Anger"};
+//                    result.add(i, data);
+//                    i++;
+//                }
+//                if(!list_emotions[1]){
+//                    String[] data = {"0", "fear", "Fear"};
+//                    result.add(i, data);
+//                    i++;
+//                }
+//                if(!list_emotions[2]){
+//                    String[] data = {"0", "joy", "Joy"};
+//                    result.add(i, data);
+//                    i++;
+//                }
+//                if(!list_emotions[3]){
+//                    String[] data = {"0", "sadness", "Sadness"};
+//                    result.add(i, data);
+//                    i++;
+//                }
+
                 return result;
             }
         } catch (Exception e) {
-            Log.i("tonel", e.getStackTrace()[0].getLineNumber() + e.toString());
+            Log.d("tonel", e.getStackTrace()[0].getLineNumber() + e.toString());
             new Global(context).error_occured("An error occured, please try again.");
             return null;
         }
+    }
+
+    private boolean isNetworkConnected(Context context) {
+        ConnectivityManager cm =
+                (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        return activeNetwork != null && activeNetwork.isConnectedOrConnecting();
     }
 }

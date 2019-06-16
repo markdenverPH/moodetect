@@ -40,20 +40,20 @@ public class Login extends AppCompatActivity implements DialogInterface.OnDismis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        forgot_pass_dialog = new ForgotPasswordDialog();
+        global = new Global(getApplicationContext());
+        registrationForm = new RegistrationForm();
         btn_login = findViewById(R.id.btn_login);
         btn_register = findViewById(R.id.btn_register);
         til_email = findViewById(R.id.til_email);
         til_pass = findViewById(R.id.til_pass);
         base_layout = findViewById(R.id.base_layout);
-        registrationForm = new RegistrationForm();
-        til_pass.setTypeface(global.getCustomTypeface());
-        til_email.setTypeface(global.getCustomTypeface());
         et_email = findViewById(R.id.et_email);
         et_pass = findViewById(R.id.et_pass);
         firebaseAuth = FirebaseAuth.getInstance();
-        global = new Global(getApplicationContext());
         tv_forgot_pass = findViewById(R.id.tv_forgot_pass);
-        forgot_pass_dialog = new ForgotPasswordDialog();
+        til_pass.setTypeface(global.getCustomTypeface());
+        til_email.setTypeface(global.getCustomTypeface());
 
         btn_register.setOnClickListener(new View.OnClickListener() {
             @Override

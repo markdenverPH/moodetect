@@ -33,18 +33,18 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        global = new Global(getApplicationContext());
+        profileDialog = new ProfileDialog();
         tv_logout = findViewById(R.id.tv_logout);
         tv_greet = findViewById(R.id.tv_greet);
-        global = new Global(getApplicationContext());
-        sharedPref = getApplicationContext().getSharedPreferences("basic_info", Context.MODE_PRIVATE);
         ll_speak = findViewById(R.id.ll_speak);
         ll_write = findViewById(R.id.ll_write);
         ll_base_layout = findViewById(R.id.base_layout_main);
-        last_clicked = 0; // if 1 - speak up, if 2 write up
-        profileDialog = new ProfileDialog();
         tv_profile_fullname = findViewById(R.id.tv_profile_fullname);
         iv_profile = findViewById(R.id.iv_profile);
         ll_moodlets = findViewById(R.id.ll_moodlets);
+        sharedPref = getApplicationContext().getSharedPreferences("basic_info", Context.MODE_PRIVATE);
+        last_clicked = 0; // if 1 - speak up, if 2 write up
 
         String str_temp = sharedPref.getString("bi_first_name", "no first_name") + " " +
                 sharedPref.getString("bi_last_name", "no last_name");
