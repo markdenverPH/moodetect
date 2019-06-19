@@ -103,6 +103,11 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
                     i++;
                 }
 
+                // if emotions detected: tentative, analytical, confident
+                if(result.isEmpty()){
+                    String[] data = {"1", "neutral", "Neutral"};
+                    result.add(0, data);
+                }
 //                if(!list_emotions[0]){
 //                    String[] data = {"0", "anger", "Anger"};
 //                    result.add(i, data);
