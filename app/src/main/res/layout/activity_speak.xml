@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_base_layout_speak"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_color"
+    tools:context=".SpeakActivity">
+
+    <ScrollView
+        android:id="@+id/sv_speak_up"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <LinearLayout
+                android:id="@+id/ll_mic_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Input"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:gravity="center_horizontal"
+                    android:text="Press the mic, and speak"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dip" />
+
+                <ImageButton
+                    android:id="@+id/ib_mic"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_home_bordered"
+                    android:padding="8dip"
+                    app:srcCompat="@drawable/ic_mic" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_transcript"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Transcription"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_instruction"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:gravity="center_horizontal"
+                    android:text="Edit the text if it is inaccurate.\nIf you record again, the result will be\nconcatenated. Press process to proceed."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="16dip" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="8dip"
+                    android:background="@drawable/bg_home_bordered"
+                    android:orientation="horizontal"
+                    android:padding="8dip">
+
+                    <EditText
+                        android:id="@+id/et_transcript"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Text Transcript"
+                        android:inputType="textMultiLine"
+                        android:isScrollContainer="true"
+                        android:lines="5"
+                        android:maxLines="5" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dip"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_speak_clear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_rounded_login_dark"
+                    android:fontFamily="@font/varela_round"
+                    android:text="clear"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_speak_process"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dip"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_fragment"
+                    android:fontFamily="@font/varela_round"
+                    android:text="process" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Result"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/pc_result"
+                    android:layout_width="match_parent"
+                    android:layout_height="350dip"
+                    android:layout_marginLeft="8dip"
+                    android:layout_marginRight="8dip" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="8dip"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Suggestion"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="20dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_suggest_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dip"
+                    android:fontFamily="@font/varela_round"
+                    android:paddingLeft="8dip"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_suggest_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dip"
+                    android:layout_marginTop="4dip"
+                    android:layout_marginRight="8dip"
+                    android:layout_marginBottom="8dip"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dip" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

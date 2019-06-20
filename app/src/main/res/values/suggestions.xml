@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- holds suggestions -->
+
+    <!-- ANGER:
+    src:
+    https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/anger-management/art-20045434
+    -->
+    <string name="sugg_anger_desc">
+        Likelihood of writer being perceived as angry. Low value indicates unlikely to be perceived as angry. High value indicates very likely to be perceived as angry.
+    </string>
+    <string-array name="arr_sugg_titles_anger">
+        <item>Think before you speak.</item>
+        <item>Once you\'re calm, express your anger.</item>
+        <item>Get some exercise.</item>
+        <item>Take a timeout.</item>
+        <item>Identify possible solutions.</item>
+        <item>Stick with \'I\' statements.</item>
+        <item>Don\'t hold a grudge.</item>
+        <item>Use humor to release tension.</item>
+        <item>Practice relaxation skills.</item>
+        <item>Know when to seek help.</item>
+    </string-array>
+
+    <string-array name="arr_sugg_values_anger">
+        <item>
+            In the heat of the moment, it\'s easy to say something you\'ll later regret. Take a few moments to collect your thoughts before saying anything — and allow others involved in the situation to do the same.
+        </item>
+        <item>
+            As soon as you\'re thinking clearly, express your frustration in an assertive but nonconfrontational way. State your concerns and needs clearly and directly, without hurting others or trying to control them.
+        </item>
+        <item>
+            Physical activity can help reduce stress that can cause you to become angry. If you feel your anger escalating, go for a brisk walk or run, or spend some time doing other enjoyable physical activities.
+        </item>
+        <item>
+            Timeouts aren\'t just for kids. Give yourself short breaks during times of the day that tend to be stressful. A few moments of quiet time might help you feel better prepared to handle what\'s ahead without getting irritated or angry.
+        </item>
+        <item>
+            Instead of focusing on what made you mad, work on resolving the issue at hand. Remind yourself that anger won\'t fix anything and might only make it worse.
+        </item>
+        <item>
+            To avoid criticizing or placing blame — which might only increase tension — use \"I\" statements to describe the problem. Be respectful and specific. For example, say, \"I\'m upset that you left the table without offering to help with the dishes\" instead of \"You never do any housework.\".
+        </item>
+        <item>
+            Forgiveness is a powerful tool. If you allow anger and other negative feelings to crowd out positive feelings, you might find yourself swallowed up by your own bitterness or sense of injustice. But if you can forgive someone who angered you, you might both learn from the situation and strengthen your relationship.
+        </item>
+        <item>
+            Lightening up can help diffuse tension. Use humor to help you face what\'s making you angry and, possibly, any unrealistic expectations you have for how things should go. Avoid sarcasm, though — it can hurt feelings and make things worse.
+        </item>
+        <item>
+            When your temper flares, put relaxation skills to work. Practice deep-breathing exercises, imagine a relaxing scene, or repeat a calming word or phrase, such as \"Take it easy.\". You might also listen to music, write in a journal or do a few yoga poses — whatever it takes to encourage relaxation.
+        </item>
+        <item>
+            Learning to control anger is a challenge for everyone at times. Seek help for anger issues if your anger seems out of control, causes you to do things you regret or hurts those around you.
+        </item>
+    </string-array>
+
+
+    <!-- FEAR:
+    src:
+    https://www.nhs.uk/conditions/stress-anxiety-depression/overcoming-fears/
+    -->
+    <string name="sugg_fear_desc">
+        Likelihood of writer being perceived as scared. Low value indicates unlikely to be perceived as fearful. High value, very likely to be perceived as scared.
+    </string>
+    <string-array name="arr_sugg_titles_fear">
+        <item>Take time out.</item>
+        <item>Breathe through panic.</item>
+        <item>Face your fears.</item>
+        <item>Imagine the worst.</item>
+        <item>Look at the evidence.</item>
+        <item>Do not try to be perfect.</item>
+        <item>Visualise a happy place.</item>
+        <item>Talk about it.</item>
+        <item>Go back to basics.</item>
+        <item>Reward yourself.</item>
+    </string-array>
+
+    <string-array name="arr_sugg_values_fear">
+        <item>
+            It\'s impossible to think clearly when you\'re flooded with fear or anxiety. The first thing to do is take time out so you can physically calm down. Distract yourself from the worry for 15 minutes by going for a walk, making a cup of tea or having a bath.
+        </item>
+        <item>
+            If you start to get a faster heartbeat or sweating palms, the best thing is not to fight it. Stay where you are and simply feel the panic without trying to distract yourself. Place the palm of your hand on your stomach and breathe slowly and deeply. The goal is to help the mind get used to coping with panic, which takes the fear of fear away.
+        </item>
+        <item>
+            Avoiding fears only makes them scarier. Whatever your fear, if you face it, it should start to fade. If you panic one day getting into a lift, for example, it\'s best to get back into a lift the next day.
+        </item>
+        <item>
+            Try imagining the worst thing that can happen – perhaps it\'s panicking and having a heart attack. Then try to think yourself into having a heart attack. It\'s just not possible. The fear will run away the more you chase it.
+        </item>
+        <item>
+            It sometimes helps to challenge fearful thoughts. For example, if you\'re scared of getting trapped in a lift and suffocating, ask yourself if you have ever heard of this happening to someone. Ask yourself what you would say to a friend who had a similar fear.
+        </item>
+        <item>
+            Life is full of stresses, yet many of us feel that our lives must be perfect. Bad days and setbacks will always happen, and it\'s important to remember that life is messy.
+        </item>
+        <item>
+            Take a moment to close your eyes and imagine a place of safety and calm. It could be a picture of you walking on a beautiful beach, or snuggled up in bed with the cat next to you, or a happy memory from childhood. Let the positive feelings soothe you until you feel more relaxed.
+        </item>
+        <item>
+            Sharing fears takes away a lot of their scariness. If you cannot talk to a partner, friend or family member, call a helpline. If your fears are not going away, you can refer yourself directly to a psychological therapies service without seeing your GP.
+        </item>
+        <item>
+            Lots of people turn to alcohol or drugs to cope with anxiety, but this will only make matters worse. Simple, everyday things like a good night\'s sleep, a wholesome meal and a walk are often the best cures for fear.
+        </item>
+        <item>
+            Finally, give yourself a treat. When you have made that call you have been dreading, for example, reinforce your success by treating yourself to a massage, a country walk, a meal out, a book, or whatever little gift makes you happy.
+        </item>
+    </string-array>
+
+
+    <!-- JOY:
+    src:
+    https://www.lifehack.org/articles/communication/10-scientifically-proven-ways-stay-happy-all-the-time.html
+    -->
+    <string name="sugg_joy_desc">
+        Joy or happiness has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.
+    </string>
+    <string-array name="arr_sugg_titles_joy">
+        <item>Exercise..</item>
+        <item>Positive thinking affects your performance.</item>
+        <item>Trash your negative thoughts.</item>
+        <item>Treasure your experiences more than your possessions.</item>
+        <item>Write down why you are grateful.</item>
+        <item>Practice mindfulness.</item>
+        <item>Don\’t forget beauty sleep.</item>
+        <item>Focus on the life you want to live.</item>
+        <item>Focus on your strengths.</item>
+    </string-array>
+
+    <string-array name="arr_sugg_values_joy">
+        <item>
+            Lots of studies on this one. Exercising releases the good mood endorphins so that you are always in a better mood after a workout or simply a walk to the supermarket. There is a study about three groups of depressed people were put on a regime of anti-depressants, exercise or a combination of the two. No surprise to know that all three groups were happier, but did it last? Six months later, the group who had been treated with exercise only, had a very low relapse rate of 9%. The other two groups\' relapse rates were ranging from 38% to 31%.
+        </item>
+        <item>
+            “Happiness is the precursor to success.” \n– Shawn Achor\n\n
+            According to Shawn Achor, if he knows everything about what factors are impinging on your happiness such as stressors, hassles, successes, economic circumstances, relationships and so on, then he can only predict 10% of your long term happiness. The remaining 90% is how you process the world around you.\n
+            Positive thinking raises energy levels, creativity and productivity by as much as 30%. The secret is to use positive thinking now, rather than when you are rich and famous.
+        </item>
+        <item>
+            Some people are overwhelmed by their negative thoughts and they have real problems in getting rid of them. A University of Madrid study found that by actually writing these thoughts down on a piece of paper and then destroying them was effective. They recommended that you either tear them up, throw them in the trash or burn them!\n\n
+            The fact of discarding them physically does help in reducing their toxic effects. Psychologists suggest doing this on a regular basis.
+        </item>
+        <item>
+            Thomas Gilovich, a psychologist, has done quite a lot of research as to why it is better to treasure memorable and pleasant experiences rather than the material things we buy. Comparing possessions and looking at better objects after purchase can be demoralizing and ruin the initial pleasure we got when purchasing and taking possession of that new thing.\n\n
+            But treasuring experiences is not nearly as destructive. They belong to us, they are special and they provide longer lasting happiness. We should always aim to visit a new place or just go trekking.
+        </item>
+        <item>
+            Feeling and thinking about the things you are grateful for as you wake up is a great way to build more happiness. Research on our brain shows that we always tend to focus on the negative things of life like those worries, tragedies, failures, and discontent. This is why we need to focus on the good and more especially, we need to hone in on what we should be grateful for.
+        </item>
+        <item>
+            Being mindfulness means you concentrate and pay full attention to the present moment and accept it in a non-judgmental way. This is now becoming a popular trend in psychology and medicine. When done regularly it can boost mood, reduce stress levels, and lead to a better quality of life.
+        </item>
+        <item>
+            When you do not get enough sleep, your negativity takes over big time. This was the conclusion researchers came to after several experiments. Researchers asked sleep deprived students to remember a list of words. They were getting a high score on all the negative words (81%) but when it came to the positive ones or neutral ones, they were only getting about 31% of these right. Always get a good sleep.
+        </item>
+        <item>
+            “The heart goes where the head takes it, and neither cares much about the whereabouts of the feet.” \n- Dr. Daniel Gilbert.\n\n
+            We often talk about winning the lottery and where we would go and above all what we would buy. We might even talk about giving to charity. But we never or rarely talk about what our state of mind would be and how much happier and carefree we would be. This is why focusing on priorities to get the life you want to live is so important.
+        </item>
+        <item>
+            Are you curious, open-minded or brave? How are you using these strengths to improve your life and that of others? These are key questions but people who exploit their strengths rather than dwelling on their weaknesses are generally much happier.\n\n
+            Being able to realize our full potential through exploiting our strengths is one of the best ways of finding happiness and helping to make the world a better place.
+        </item>
+    </string-array>
+
+
+    <!-- SAD:
+    src:
+    https://www.wikihow.com/Get-Happy-when-You%27re-Sad
+
+    -->
+    <string name="sugg_sad_desc">
+        Likelihood of writer being perceived as sad. Low value, unlikely to be perceived as sad. High value very likely to be perceived as sad.
+    </string>
+    <string-array name="arr_sugg_titles_sad">
+        <item>Laugh and smile.</item>
+        <item>Have a good cry.</item>
+        <item>Try to look at the bigger picture.</item>
+        <item>Distract your mind.</item>
+        <item>Read.</item>
+    </string-array>
+
+    <string-array name="arr_sugg_values_sad">
+        <item>
+            Studies have shown that the very act of smiling can improve your mood and make you feel happier. In addition, laughing releases endorphins, those brain chemicals that enhance your mood.
+            Try faking it, even though you may not feel like it. It may be forced at first, but laughing or smiling could trigger a funny or happy memory and cause a real laugh or smile to occur.
+        </item>
+        <item>
+            Even though you may not want to cry because you are trying to feel better and want to feel happy again, sometimes crying can improve your mood. If you feel the urge to cry, then don\'t hold back and instead let the tears out when you feel like it.
+            The act of crying might make you feel better and more relieved, as the act of purging the tears can create the sense that you got the sadness \"off your chest\".
+        </item>
+        <item>
+            Try to think about all of the other things that you value in life, such as your friends, family, and health, and you\'ll see that you probably have much to be happy about and thankful for, even if you don\'t feel very happy or thankful in the moment. Numerous studies have shown that gratitude is deeply connected with happiness.
+        </item>
+        <item>
+            Sometimes when we are sad, it\'s hard to think of anything else. However, dwelling on your sadness can actually do more harm than good and can increase feelings of helplessness and powerlessness. Pleasant distraction can help you focus on something other than your sadness and also reduce your stress - scientists call this \"flow\". You\'re not avoiding your problems, but instead engaging in an activity where you forget time and place.
+        </item>
+        <item>
+            Lose yourself in another world or in the past. Books transport us to places we\'ve never been often, those places are more adventurous and romantic than the places we\'re currently in. Whether you\'re reading historical fiction or a steamy romance, being absorbed in another world will help you relax your mind and place our focus elsewhere. Just six minutes of reading can help reduce your stress level by two-thirds.
+        </item>
+    </string-array>
+</resources>

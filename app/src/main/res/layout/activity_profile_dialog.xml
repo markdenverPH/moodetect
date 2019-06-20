@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_fragment"
+    android:orientation="vertical"
+    android:padding="16dip"
+    tools:context=".ProfileDialog">
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="300dip"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:text="Profile"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24dip"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="match_parent"
+        android:layout_height="100dip"
+        android:src="@drawable/ic_person" />
+
+    <TextView
+        android:id="@+id/tv_pd_fullname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/varela_round"
+        android:gravity="center_horizontal"
+        android:text="fullname"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20dip" />
+
+    <TextView
+        android:id="@+id/tv_pd_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:fontFamily="@font/varela_round"
+        android:gravity="center_horizontal"
+        android:text="email"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16dip" />
+
+    <Button
+        android:id="@+id/btn_pd_close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dip"
+        android:background="@drawable/btn_rounded_login_dark"
+        android:text="close"
+        android:textColor="@android:color/white" />
+
+</LinearLayout>

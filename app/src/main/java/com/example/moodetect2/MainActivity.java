@@ -143,8 +143,9 @@ public class MainActivity extends AppCompatActivity {
                         != PackageManager.PERMISSION_GRANTED) {
             // Permission is not granted
             Snackbar.make(ll_base_layout, "Please accept/allow the permissions.", Snackbar.LENGTH_LONG).show();
-        } else {
+        } else if(last_clicked != 0) {
             //granted
+
             Intent intent = new Intent(getApplicationContext(), SpeakActivity.class);
             intent.putExtra("last_clicked", last_clicked);
             startActivity(intent);
