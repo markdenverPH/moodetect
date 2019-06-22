@@ -2,6 +2,8 @@ package com.example.moodetect2;
 
 import android.app.Activity;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -63,6 +66,12 @@ public class RegistrationForm extends DialogFragment {
 
         til_pass.setTypeface(global.getCustomTypeface());
         til_confirm_pass.setTypeface(global.getCustomTypeface());
+
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+            getDialog().getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+            getDialog().setCanceledOnTouchOutside(false);
+        }
 
         return v;
     }

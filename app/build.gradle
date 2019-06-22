@@ -41,7 +41,7 @@ dependencies {
 
     // firebase dependencies
     implementation 'com.google.firebase:firebase-auth:17.0.0' // auth
-    implementation 'com.google.firebase:firebase-firestore:19.0.0' // firestore
+    implementation 'com.google.firebase:firebase-firestore:19.0.2' // firestore
 
     // Toasty: toast with steroids
     implementation 'com.github.GrenderG:Toasty:1.4.2'
@@ -49,4 +49,13 @@ dependencies {
     // graph
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
     implementation 'com.android.support:recyclerview-v7:28.0.0'
+
+    // facebook shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.4.0'
+
+    // PagedList for moodlets -> firestoreUI
+    implementation 'android.arch.paging:runtime:1.0.1'
+
+    // firestoreui dependency
+    implementation 'com.firebaseui:firebase-ui-firestore:5.0.0'
 }

@@ -24,7 +24,6 @@ import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
@@ -34,6 +33,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Random;
 
 public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsyncTask.AsyncTaskCompleteListener<String> {
 
@@ -172,31 +172,33 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
                 tv_suggest_title.setVisibility(View.GONE);
                 tv_suggest_value.setText("None.");
             } else {
+                int[] hold_array_id = {0,0};
                 switch(highest_emotion){
                     case "Anger":
-                        sugg_titles = res.getStringArray(R.array.arr_sugg_titles_anger);
-                        sugg_values = res.getStringArray(R.array.arr_sugg_values_anger);
+                        hold_array_id[0] = R.array.arr_sugg_titles_anger;
+                        hold_array_id[1] = R.array.arr_sugg_values_anger;
                         break;
                     case "Fear":
-                        sugg_titles = res.getStringArray(R.array.arr_sugg_titles_fear);
-                        sugg_values = res.getStringArray(R.array.arr_sugg_values_fear);
+                        hold_array_id[0] = R.array.arr_sugg_titles_fear;
+                        hold_array_id[1] = R.array.arr_sugg_values_fear;
                         break;
                     case "Joy":
-                        sugg_titles = res.getStringArray(R.array.arr_sugg_titles_joy);
-                        sugg_values = res.getStringArray(R.array.arr_sugg_values_joy);
+                        hold_array_id[0] = R.array.arr_sugg_titles_joy;
+                        hold_array_id[1] = R.array.arr_sugg_values_joy;
                         break;
                     case "Sadness":
-                        sugg_titles = res.getStringArray(R.array.arr_sugg_titles_sad);
-                        sugg_values = res.getStringArray(R.array.arr_sugg_values_sad);
+                        hold_array_id[0] = R.array.arr_sugg_titles_sad;
+                        hold_array_id[1] = R.array.arr_sugg_values_sad;
                         break;
                 }
+                sugg_titles = res.getStringArray(hold_array_id[0]);
+                sugg_values = res.getStringArray(hold_array_id[1]);
                 tv_suggest_title.setVisibility(View.VISIBLE);
-                tv_suggest_title.setText(sugg_titles[0]);
-                tv_suggest_value.setText(sugg_values[0]);
+                int index = generate_random_number(hold_array_id[0], res);
+                tv_suggest_title.setText(sugg_titles[index]);
+                tv_suggest_value.setText(sugg_values[index]);
             }
         }
-
-        // CONITNUE --- ADD ROWS IN MOODLETS FIRESTORE
 
         disable_button(false);
         str_compare2 = str_compare1;
@@ -274,5 +276,16 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
     private void hideSoftKeyboard(Activity activity) {
         InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+    }
+
+    private int generate_random_number(int array_id, Resources res){
+        // src: https://stackoverflow.com/questions/21049747/how-can-i-generate-a-random-number-in-a-certain-range/21049922
+
+        String[] hold_values = res.getStringArray(array_id);
+        int min = 0;
+        int max = hold_values.length + 1;
+        Random rand = new Random();
+        // inclusive of min, exclusive of max
+        return rand.nextInt(max - min) + min;
     }
 }
