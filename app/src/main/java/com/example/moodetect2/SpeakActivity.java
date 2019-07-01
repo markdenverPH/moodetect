@@ -144,11 +144,29 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
         } else {
             float highest_val = 0;
             String highest_emotion = "";
+            // sets default value for colors which is black
+            int[] colors = {ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e")};
 
             ArrayList<PieEntry> entries = new ArrayList<>();
             for(int i = 0; result.size() > i; i++){
                 float temp_hold_float = Float.parseFloat(result.get(i)[0]);
-                entries.add(new PieEntry(temp_hold_float, result.get(i)[2]));
+                String temp_hold_title = result.get(i)[2];
+                entries.add(new PieEntry(temp_hold_float, temp_hold_title));
+
+                switch(temp_hold_title){
+                    case "Anger":
+                        colors[i] = ColorTemplate.rgb("#e74c3c");
+                        break;
+                    case "Fear":
+                        colors[i] = ColorTemplate.rgb("#f1c40f");
+                        break;
+                    case "Joy":
+                        colors[i] = ColorTemplate.rgb("#2ecc71");
+                        break;
+                    case "Sadness":
+                        colors[i] = ColorTemplate.rgb("#e67e22");
+                        break;
+                }
 
                 if(highest_val == 0 || highest_val < temp_hold_float) {
                     highest_val = temp_hold_float;
@@ -157,7 +175,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             }
             PieDataSet dataset = new PieDataSet(entries, "Emotion/s");
             dataset.setValueFormatter(new PercentFormatter());    // makes the perc
-            dataset.setColors(ColorTemplate.JOYFUL_COLORS);    // changes the sets of colors
+            dataset.setColors(colors);    // changes the sets of colors
             dataset.setValueTypeface(global.getCustomTypeface()); // typeface for piechart labels (value nad label)
             dataset.setValueTextSize(14f);                  // for value only (percentage value)
             PieData data = new PieData(dataset);

@@ -17,13 +17,22 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     TextView tv_logout, tv_greet, tv_profile_fullname;
     Global global;
-    LinearLayout ll_speak, ll_write, ll_moodlets, ll_base_layout;
+    LinearLayout ll_speak, ll_write, ll_moodlets, ll_base_layout, ll_empty_moodlets,
+            ll_last_modlets;
     private int last_clicked;
     ImageView iv_profile;
     ProfileDialog profileDialog;
@@ -43,6 +52,8 @@ public class MainActivity extends AppCompatActivity {
         tv_profile_fullname = findViewById(R.id.tv_profile_fullname);
         iv_profile = findViewById(R.id.iv_profile);
         ll_moodlets = findViewById(R.id.ll_moodlets);
+        ll_empty_moodlets = findViewById(R.id.ll_empty_moodlets);
+        ll_last_modlets = findViewById(R.id.ll_last_modlets);
         sharedPref = getApplicationContext().getSharedPreferences("basic_info", Context.MODE_PRIVATE);
         last_clicked = 0; // if 1 - speak up, if 2 write up
 
@@ -63,15 +74,8 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
 
                 sharedPref = getApplicationContext().getSharedPreferences("basic_info", Context.MODE_PRIVATE);
-                // checks the shared prefs
-                Log.d("check_on", sharedPref.getString("bi_email", "no email"));
-                Log.d("check_on", sharedPref.getString("bi_first_name", "no first_name"));
-                Log.d("check_on", sharedPref.getString("bi_last_name", "no last_name"));
-                Log.d("check_on", String.valueOf(sharedPref.getBoolean("bi_first_login", true)));
-                Log.d("check_on", sharedPref.getString("bi_uid", "no uid"));
 
                 global.remove_basic_info();
-                Log.d("check_on", "SHARED PREF REMOVED");
 
                 Intent intent = new Intent(getApplicationContext(), Login.class);
                 startActivity(intent);
@@ -118,6 +122,26 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void show_moodlets() {
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final String uid = user.getUid();
+
+        CollectionReference questionRef = FirebaseFirestore.getInstance().collection("users/"+uid+"/moodlets");
+        questionRef.orderBy("int_time", Query.Direction.DESCENDING).limit(1).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+            @Override
+            public void onSuccess(QuerySnapshot snapshot) {
+                if(!snapshot.isEmpty()){
+                    ll_empty_moodlets.setVisibility(View.GONE);
+                    ll_last_modlets.setVisibility(View.VISIBLE);
+                    MoodletsModel model = snapshot.toObjects(MoodletsModel.class).get(0);
+                    // CONITNUE ~~~~ show the last moodlets
+                } else {
+                    // stay default
+                }
+            }
+        });
+    }
+
     private void show_profile() {
         if(!profileDialog.isVisible()){
             profileDialog.show(getSupportFragmentManager(), "profile_dialog");
@@ -130,6 +154,12 @@ public class MainActivity extends AppCompatActivity {
                     Manifest.permission.ACCESS_NETWORK_STATE,
                     Manifest.permission.RECORD_AUDIO}, 2);
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        show_moodlets();
     }
 
     @Override
