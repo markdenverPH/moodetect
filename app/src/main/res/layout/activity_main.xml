@@ -9,6 +9,11 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_swipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -202,7 +207,7 @@
                                     android:gravity="right"
                                     android:text="1 min ago"
                                     android:textColor="@android:color/darker_gray"
-                                    android:textSize="14dip" />
+                                    android:textSize="12dip" />
 
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -217,7 +222,7 @@
                                         android:fontFamily="@font/varela_round"
                                         android:text="Joy"
                                         android:textColor="@color/colorPrimaryDark"
-                                        android:textSize="20dip"
+                                        android:textSize="18dip"
                                         android:textStyle="bold" />
 
                                     <TextView
@@ -228,7 +233,7 @@
                                         android:fontFamily="@font/varela_round"
                                         android:text="Emotion"
                                         android:textColor="@color/colorAccent"
-                                        android:textSize="14dip" />
+                                        android:textSize="12dip" />
 
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -249,7 +254,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="0.0"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="16dip" />
+                                                android:textSize="14dip" />
 
                                             <TextView
                                                 android:layout_width="match_parent"
@@ -258,7 +263,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="Anger"
                                                 android:textColor="@color/colorAccent"
-                                                android:textSize="14dip" />
+                                                android:textSize="12dip" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -274,7 +279,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="0.0"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="16dip" />
+                                                android:textSize="14dip" />
 
                                             <TextView
                                                 android:layout_width="match_parent"
@@ -283,7 +288,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="Fear"
                                                 android:textColor="@color/colorAccent"
-                                                android:textSize="14dip" />
+                                                android:textSize="12dip" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -299,7 +304,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="0.0"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="16dip" />
+                                                android:textSize="14dip" />
 
                                             <TextView
                                                 android:layout_width="match_parent"
@@ -308,7 +313,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="Joy"
                                                 android:textColor="@color/colorAccent"
-                                                android:textSize="14dip" />
+                                                android:textSize="12dip" />
                                         </LinearLayout>
 
                                         <LinearLayout
@@ -324,7 +329,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="0.0"
                                                 android:textColor="@color/colorPrimaryDark"
-                                                android:textSize="16dip" />
+                                                android:textSize="14dip" />
 
                                             <TextView
                                                 android:id="@+id/textView17"
@@ -334,7 +339,7 @@
                                                 android:fontFamily="@font/varela_round"
                                                 android:text="Sadness"
                                                 android:textColor="@color/colorAccent"
-                                                android:textSize="14dip" />
+                                                android:textSize="12dip" />
                                         </LinearLayout>
                                     </LinearLayout>
 
@@ -348,7 +353,8 @@
                                         android:lines="2"
                                         android:maxLines="2"
                                         android:text="I won a million pesos in PCSO lotto."
-                                        android:textColor="@color/colorPrimaryDark" />
+                                        android:textColor="@color/colorPrimaryDark"
+                                        android:textSize="12dip" />
                                 </LinearLayout>
 
                             </LinearLayout>
@@ -393,7 +399,7 @@
                                     android:fontFamily="@font/varela_round"
                                     android:text="Input Text"
                                     android:textColor="@color/colorPrimaryDark"
-                                    android:textSize="16dip"
+                                    android:textSize="14dip"
                                     android:textStyle="bold" />
 
                                 <TextView
@@ -403,7 +409,7 @@
                                     android:fontFamily="@font/varela_round"
                                     android:text="Date here"
                                     android:textColor="@android:color/darker_gray"
-                                    android:textSize="14dip" />
+                                    android:textSize="12dip" />
                             </LinearLayout>
 
                             <TextView
@@ -415,7 +421,8 @@
                                 android:layout_marginBottom="8dip"
                                 android:fontFamily="@font/varela_round"
                                 android:text="this is the value"
-                                android:textColor="@color/colorPrimaryDark" />
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="12dip" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -424,7 +431,7 @@
                                 android:fontFamily="@font/varela_round"
                                 android:text="Suggestion"
                                 android:textColor="@color/colorPrimaryDark"
-                                android:textSize="16dip"
+                                android:textSize="14dip"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -438,6 +445,7 @@
                                 android:paddingLeft="8dip"
                                 android:text="this is title"
                                 android:textColor="@color/colorPrimaryDark"
+                                android:textSize="12dip"
                                 android:textStyle="bold" />
 
                             <TextView
@@ -449,7 +457,8 @@
                                 android:layout_marginBottom="8dip"
                                 android:fontFamily="@font/varela_round"
                                 android:text="this is the value"
-                                android:textColor="@color/colorPrimaryDark" />
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="12dip" />
                         </LinearLayout>
                     </LinearLayout>
 
@@ -487,6 +496,6 @@
 
         </LinearLayout>
     </ScrollView>
-
+    </android.support.v4.widget.SwipeRefreshLayout>
 
 </LinearLayout>

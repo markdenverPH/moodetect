@@ -1,6 +1,5 @@
 package com.example.moodetect2;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;

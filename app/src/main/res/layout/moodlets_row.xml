@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_base_moodlets"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_divier"
+        android:layout_width="match_parent"
+        android:layout_height="1dip"
+        android:alpha="0.6"
+        android:background="@color/colorPrimaryDark"
+        android:orientation="horizontal"></LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bg_color"
+        android:orientation="vertical"
+        android:padding="8dip">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/pc_moodlets_result"
+                android:layout_width="150dip"
+                android:layout_height="150dip">
+
+            </com.github.mikephil.charting.charts.PieChart>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="8dip"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_header_time_ago"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:gravity="right"
+                    android:text="1 min ago"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14dip" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_header_emotion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/varela_round"
+                        android:text="Joy"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="20dip"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="-4dip"
+                        android:fontFamily="@font/varela_round"
+                        android:text="Emotion"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="14dip" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dip"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_anger_val"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/varela_round"
+                                android:text="0.0"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16dip" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-4dip"
+                                android:fontFamily="@font/varela_round"
+                                android:text="Anger"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="14dip" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_fear_val"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/varela_round"
+                                android:text="0.0"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16dip" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-4dip"
+                                android:fontFamily="@font/varela_round"
+                                android:text="Fear"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="14dip" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_joy_val"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/varela_round"
+                                android:text="0.0"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16dip" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-4dip"
+                                android:fontFamily="@font/varela_round"
+                                android:text="Joy"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="14dip" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tv_sadness_val"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/varela_round"
+                                android:text="0.0"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="16dip" />
+
+                            <TextView
+                                android:id="@+id/textView17"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="-4dip"
+                                android:fontFamily="@font/varela_round"
+                                android:text="Sadness"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="14dip" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_header_input_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dip"
+                        android:ellipsize="end"
+                        android:gravity="center_vertical"
+                        android:lines="2"
+                        android:maxLines="2"
+                        android:text="I won a million pesos in PCSO lotto."
+                        android:textColor="@color/colorPrimaryDark" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_inner_separator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="75dip"
+                android:layout_height="1dip"
+                android:alpha="0.4"
+                android:background="@color/colorPrimaryDark"
+                android:orientation="horizontal">
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_moodlets_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dip"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textView18"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Input Text"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="16dip"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_date_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/varela_round"
+                    android:text="Date here"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="14dip" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_input_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginBottom="8dip"
+                android:fontFamily="@font/varela_round"
+                android:text="this is the value"
+                android:textColor="@color/colorPrimaryDark" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dip"
+                android:fontFamily="@font/varela_round"
+                android:text="Suggestion"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16dip"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_suggest_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginBottom="8dip"
+                android:fontFamily="@font/varela_round"
+                android:paddingLeft="8dip"
+                android:text="this is title"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_suggest_value"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dip"
+                android:layout_marginRight="8dip"
+                android:layout_marginBottom="8dip"
+                android:fontFamily="@font/varela_round"
+                android:text="this is the value"
+                android:textColor="@color/colorPrimaryDark" />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

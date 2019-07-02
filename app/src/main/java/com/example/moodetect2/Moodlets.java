@@ -143,6 +143,7 @@ public class Moodlets extends AppCompatActivity {
                 tv_suggest_title, tv_suggest_value, tv_input_text, tv_date_time,
                 tv_anger_val, tv_fear_val, tv_joy_val, tv_sadness_val;
         Resources res;
+        Global global;
 
         MoodletsViewHolder(@NonNull View v) {
             super(v);
@@ -162,6 +163,7 @@ public class Moodlets extends AppCompatActivity {
             tv_sadness_val = v.findViewById(R.id.tv_sadness_val);
             tv_date_time = v.findViewById(R.id.tv_date_time);
             ll_divier = v.findViewById(R.id.ll_divier);
+            global = new Global(getApplicationContext());
             res = getResources();
 
             initialize_piechart();
@@ -176,7 +178,7 @@ public class Moodlets extends AppCompatActivity {
         }
 
         private void set_date_time(MoodletsModel model) {
-            tv_date_time.setText(model.getDate() + " " + model.getTime());
+            tv_date_time.setText(model.getDate_time());
             tv_header_time_ago.setText(TimeAgo.getTimeAgo(model.getInt_time()));
         }
 

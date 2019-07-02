@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.speech.RecognizerIntent;
+import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,8 +31,18 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -50,6 +61,8 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
     String[] sugg_titles, sugg_values;
     Resources res;
     String str_compare1, str_compare2;
+    PieData data;
+    int index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +86,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
         res = getResources();
         str_compare1 = "";
         str_compare2 = "";
+        index = 0;
         initialized_pie_chart();
 
         // https://stackoverflow.com/questions/19207762/must-i-specify-the-parent-activity-name-in-the-android-manifest
@@ -139,19 +153,24 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
     @Override
     public void onTaskComplete(ArrayList<String[]> result) {
         if(result == null){
-            Log.d("dumaan_dito", "return null from async");
             pc_result.setNoDataText("Data cannot be processed. Please try again.");
         } else {
             float highest_val = 0;
             String highest_emotion = "";
+            List<String> emo_title = new ArrayList<>();
+            List<String> emo_values = new ArrayList<>();
             // sets default value for colors which is black
             int[] colors = {ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e"), ColorTemplate.rgb("#34495e")};
 
             ArrayList<PieEntry> entries = new ArrayList<>();
             for(int i = 0; result.size() > i; i++){
-                float temp_hold_float = Float.parseFloat(result.get(i)[0]);
-                String temp_hold_title = result.get(i)[2];
+                float temp_hold_float = Float.parseFloat(result.get(i)[0]) * 100;
+                String temp_hold_title = result.get(i)[2]; // gets the upper case first letter
                 entries.add(new PieEntry(temp_hold_float, temp_hold_title));
+
+                emo_title.add(result.get(i)[1]); // gets the lower case one
+                String round_off = String.format("%.2f", temp_hold_float);
+                emo_values.add(round_off);
 
                 switch(temp_hold_title){
                     case "Anger":
@@ -178,13 +197,8 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             dataset.setColors(colors);    // changes the sets of colors
             dataset.setValueTypeface(global.getCustomTypeface()); // typeface for piechart labels (value nad label)
             dataset.setValueTextSize(14f);                  // for value only (percentage value)
-            PieData data = new PieData(dataset);
+            data = new PieData(dataset);
             data.setValueTextColor(Color.BLACK);
-
-            pc_result.setData(data);
-            pc_result.animateY(1000, Easing.EaseInOutCubic); // animate also applies invalidate
-//            pc_result.invalidate(); // refresh
-            sv_speak_up.fullScroll(ScrollView.FOCUS_DOWN);
 
             if(result.get(0)[2].equalsIgnoreCase("neutral")) {
                 tv_suggest_title.setVisibility(View.GONE);
@@ -212,9 +226,31 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
                 sugg_titles = res.getStringArray(hold_array_id[0]);
                 sugg_values = res.getStringArray(hold_array_id[1]);
                 tv_suggest_title.setVisibility(View.VISIBLE);
-                int index = generate_random_number(hold_array_id[0], res);
-                tv_suggest_title.setText(sugg_titles[index]);
-                tv_suggest_value.setText(sugg_values[index]);
+                index = generate_random_number(hold_array_id[0], res);
+
+                // setup insertion
+                long time = System.currentTimeMillis();
+                DateFormat df = new SimpleDateFormat("MMM d, yyyy h:mm a");
+                MoodletsModel model = new MoodletsModel(df.format(new Date(time)), emo_title, emo_values,
+                        String.valueOf(et_transcript.getText()), highest_emotion.toLowerCase(), index, time);
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                final String uid = user.getUid();
+                CollectionReference questionRef = FirebaseFirestore.getInstance().collection("users/"+uid+"/moodlets");
+                questionRef.document(String.valueOf(time)).set(model).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            // insert to firestore first before showing results
+                            tv_suggest_title.setText(sugg_titles[index]);
+                            tv_suggest_value.setText(sugg_values[index]);
+                            pc_result.setData(data);
+                            pc_result.animateY(1000, Easing.EaseInOutCubic); // animate also applies invalidate
+                            sv_speak_up.fullScroll(ScrollView.FOCUS_DOWN);
+                        } else {
+                            global.error_occured(task);
+                        }
+                    }
+                });
             }
         }
 
@@ -301,7 +337,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
 
         String[] hold_values = res.getStringArray(array_id);
         int min = 0;
-        int max = hold_values.length + 1;
+        int max = hold_values.length;
         Random rand = new Random();
         // inclusive of min, exclusive of max
         return rand.nextInt(max - min) + min;
