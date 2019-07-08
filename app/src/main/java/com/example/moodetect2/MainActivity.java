@@ -172,6 +172,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    // gets the last moodlet and displays in UI
     private void show_moodlets() {
         if(!srl_swipe.isRefreshing()) {
             srl_swipe.setRefreshing(true);

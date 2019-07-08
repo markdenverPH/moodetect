@@ -2,6 +2,7 @@ package com.example.moodetect2;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -95,6 +97,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             is_it_write_up(intent.getIntExtra("last_clicked", 0));
         }
 
+        // click listener to trigger Android's built-in speech recognition
         ib_mic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -111,6 +114,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             }
         });
 
+        // clears the input text
         btn_clear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +122,7 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             }
         });
 
+        // process the input text by passing the string into asynctask class
         btn_process.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -150,6 +155,9 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
         });
     }
 
+    // when conversion of json object to arraylist is finished,
+    // this callback function is triggered and basically insert data to database and
+    // display the information in UI
     @Override
     public void onTaskComplete(ArrayList<String[]> result) {
         if(result == null){
@@ -203,6 +211,10 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
             if(result.get(0)[2].equalsIgnoreCase("neutral")) {
                 tv_suggest_title.setVisibility(View.GONE);
                 tv_suggest_value.setText("None.");
+                pc_result.setData(null);
+                pc_result.setNoDataText("Emotion is undetermined.");
+                pc_result.invalidate();
+                sv_speak_up.fullScroll(ScrollView.FOCUS_DOWN);
             } else {
                 int[] hold_array_id = {0,0};
                 switch(highest_emotion){
@@ -276,6 +288,9 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
         l.setTypeface(global.getCustomTypeface());
     }
 
+    // check if it is "Write Up" or "Speak Up".
+    // basically, "Write Up" is the same as "Speak Up"
+    // the mic function is hidden from UI
     private void is_it_write_up(int clicked) {
         if(clicked == 2){
             ll_mic_layout.setVisibility(View.GONE);
@@ -294,6 +309,8 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
         return super.onOptionsItemSelected(item);
     }
 
+    // callback function from speech recognition
+    // gets the result as string
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -328,10 +345,15 @@ public class SpeakActivity extends AppCompatActivity implements AnalyzeTextAsync
     }
 
     private void hideSoftKeyboard(Activity activity) {
-        InputMethodManager inputMethodManager = (InputMethodManager)  activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
+        InputMethodManager imm = (InputMethodManager)activity.getSystemService( Context.INPUT_METHOD_SERVICE );
+        View f = activity.getCurrentFocus();
+        if( null != f && null != f.getWindowToken() && EditText.class.isAssignableFrom( f.getClass() ) )
+            imm.hideSoftInputFromWindow( f.getWindowToken(), 0 );
+        else
+            activity.getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN );
     }
 
+    // generates random number as a selected suggestion from list of suggestions
     private int generate_random_number(int array_id, Resources res){
         // src: https://stackoverflow.com/questions/21049747/how-can-i-generate-a-random-number-in-a-certain-range/21049922
 

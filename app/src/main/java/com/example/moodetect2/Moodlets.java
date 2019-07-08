@@ -82,6 +82,8 @@ public class Moodlets extends AppCompatActivity {
                 .setQuery(query, config, MoodletsModel.class)
                 .build();
 
+        // firestore do the work on fetching and adding additional rows
+        // when the scroll reaches the bottom
         final FirestorePagingAdapter<MoodletsModel, MoodletsViewHolder> adapter =
                 new FirestorePagingAdapter<MoodletsModel, MoodletsViewHolder>(options) {
                     View v;
@@ -97,9 +99,7 @@ public class Moodlets extends AppCompatActivity {
                     protected void onBindViewHolder(@NonNull final MoodletsViewHolder holder, final int i, @NonNull MoodletsModel model) {
                         holder.bind(model);
                         ll_preloader.setVisibility(View.GONE);
-                        if(i == 0) {
-                            holder.ll_divier.setVisibility(View.GONE);
-                        }
+
                         holder.ll_base_moodlets.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -138,7 +138,7 @@ public class Moodlets extends AppCompatActivity {
     private class MoodletsViewHolder extends RecyclerView.ViewHolder {
         PieChart pc_moodlets_result;
         LinearLayout ll_base_moodlets, ll_moodlets_content, ll_inner_separator,
-                ll_divier;
+                ll_divider;
         TextView tv_header_time_ago, tv_header_emotion, tv_header_input_text,
                 tv_suggest_title, tv_suggest_value, tv_input_text, tv_date_time,
                 tv_anger_val, tv_fear_val, tv_joy_val, tv_sadness_val;
@@ -162,7 +162,7 @@ public class Moodlets extends AppCompatActivity {
             tv_joy_val = v.findViewById(R.id.tv_joy_val);
             tv_sadness_val = v.findViewById(R.id.tv_sadness_val);
             tv_date_time = v.findViewById(R.id.tv_date_time);
-            ll_divier = v.findViewById(R.id.ll_divier);
+            ll_divider = v.findViewById(R.id.ll_divider);
             global = new Global(getApplicationContext());
             res = getResources();
 

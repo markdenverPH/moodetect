@@ -2,10 +2,7 @@
 <resources>
     <!-- holds suggestions -->
 
-    <!-- ANGER:
-    src:
-    https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/anger-management/art-20045434
-    -->
+    <!-- ANGER: -->
     <string name="sugg_anger_desc">
         Likelihood of writer being perceived as angry. Low value indicates unlikely to be perceived as angry. High value indicates very likely to be perceived as angry.
     </string>
@@ -56,10 +53,7 @@
     </string-array>
 
 
-    <!-- FEAR:
-    src:
-    https://www.nhs.uk/conditions/stress-anxiety-depression/overcoming-fears/
-    -->
+    <!-- FEAR: -->
     <string name="sugg_fear_desc">
         Likelihood of writer being perceived as scared. Low value indicates unlikely to be perceived as fearful. High value, very likely to be perceived as scared.
     </string>
@@ -110,10 +104,7 @@
     </string-array>
 
 
-    <!-- JOY:
-    src:
-    https://www.lifehack.org/articles/communication/10-scientifically-proven-ways-stay-happy-all-the-time.html
-    -->
+    <!-- JOY: -->
     <string name="sugg_joy_desc">
         Joy or happiness has shades of enjoyment, satisfaction and pleasure. There is a sense of well-being, inner peace, love, safety and contentment.
     </string>
@@ -166,11 +157,7 @@
     </string-array>
 
 
-    <!-- SAD:
-    src:
-    https://www.wikihow.com/Get-Happy-when-You%27re-Sad
-
-    -->
+    <!-- SAD: -->
     <string name="sugg_sad_desc">
         Likelihood of writer being perceived as sad. Low value, unlikely to be perceived as sad. High value very likely to be perceived as sad.
     </string>

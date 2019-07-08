@@ -36,17 +36,12 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
             Global global = new Global(null);
             ToneAnalyzer toneAnalyzer = global.get_analyzer();
 
-//        String text = "Team, I know that times are tough! Product "
-//                + "sales have been disappointing for the past three "
-//                + "quarters. We have a competitive product, but we "
-//                + "need to do a better job of selling it!";
-
             ToneOptions toneOptions = new ToneOptions.Builder()
                     .text(string[0])
                     .build();
 
             ToneAnalysis toneAnalysis = toneAnalyzer.tone(toneOptions).execute().getResult();
-            Log.d("tonel", String.valueOf(toneAnalysis));
+            Log.d("analyze_error", String.valueOf(toneAnalysis));
 
             return String.valueOf(toneAnalysis);
         } else {
@@ -54,6 +49,9 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
         }
     }
 
+    // calls the parseJSON function to convert json object to ArrayList
+    // the return of parseJSON function triggers the callback
+    // callback function is triggered via interface in SpeakActivity.java
     @Override
     protected void onPostExecute(String json) {
         super.onPostExecute(json);
@@ -77,7 +75,6 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
                 return result;
             } else {
                 int i = 0;
-//                boolean[] list_emotions = {false, false, false, false}; // anger, fear, joy, sadness
                 while (json_array_length > i) {
                     jsonObject = jsonArray.getJSONObject(i);
                     String hold_tone_id = jsonObject.getString("tone_id");
@@ -88,17 +85,6 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
                         String[] data = {jsonObject.getString("score"), hold_tone_id,
                                 jsonObject.getString("tone_name")};
                         result.add(i, data);
-
-                        // checks if already added
-//                        if(hold_tone_id.equalsIgnoreCase("anger")) {
-//                            list_emotions[0] = true;
-//                        } else if(hold_tone_id.equalsIgnoreCase("fear")) {
-//                            list_emotions[1] = true;
-//                        } else if(hold_tone_id.equalsIgnoreCase("joy")) {
-//                            list_emotions[2] = true;
-//                        } else if(hold_tone_id.equalsIgnoreCase("sadness")) {
-//                            list_emotions[3] = true;
-//                        }
                     }
                     i++;
                 }
@@ -108,31 +94,11 @@ class AnalyzeTextAsyncTask extends AsyncTask<String, Void, String> {
                     String[] data = {"1", "neutral", "Neutral"};
                     result.add(0, data);
                 }
-//                if(!list_emotions[0]){
-//                    String[] data = {"0", "anger", "Anger"};
-//                    result.add(i, data);
-//                    i++;
-//                }
-//                if(!list_emotions[1]){
-//                    String[] data = {"0", "fear", "Fear"};
-//                    result.add(i, data);
-//                    i++;
-//                }
-//                if(!list_emotions[2]){
-//                    String[] data = {"0", "joy", "Joy"};
-//                    result.add(i, data);
-//                    i++;
-//                }
-//                if(!list_emotions[3]){
-//                    String[] data = {"0", "sadness", "Sadness"};
-//                    result.add(i, data);
-//                    i++;
-//                }
 
                 return result;
             }
         } catch (Exception e) {
-            Log.d("tonel", e.getStackTrace()[0].getLineNumber() + e.toString());
+            Log.d("analyze_error", e.getStackTrace()[0].getLineNumber() + e.toString());
             new Global(context).error_occured("An error occured, please try again.");
             return null;
         }

@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/ll_divier"
+        android:id="@+id/ll_divider"
         android:layout_width="match_parent"
         android:layout_height="1dip"
         android:alpha="0.6"

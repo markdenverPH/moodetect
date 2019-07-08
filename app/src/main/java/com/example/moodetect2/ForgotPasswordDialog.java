@@ -48,6 +48,7 @@ public class ForgotPasswordDialog extends DialogFragment {
         return v;
     }
 
+    // sends reset password link to registered email address
     @Override
     public void onActivityCreated(Bundle arg0) {
         super.onActivityCreated(arg0);
